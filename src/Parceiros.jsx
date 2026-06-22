@@ -4,7 +4,7 @@ import {
   Pill, GraduationCap, Sparkles, HeartPulse, Glasses, Scissors, LayoutGrid
 } from 'lucide-react';
 
-// 1. DATA: UNIDADES MÉDICAS OFICIAIS (REDE CREDENCIADA)
+// DATA: UNIDADES MÉDICAS OFICIAIS (REDE CREDENCIADA)
 const REDE_CREDENCIADA = [
   {
     id: 1,
@@ -13,7 +13,7 @@ const REDE_CREDENCIADA = [
     cidade: "São João de Meriti",
     bairro: "Centro",
     endereco: "Avenida Automóvel Clube, 63 - Centro, São João de Meriti - RJ",
-    horario: "Segunda à Sexta (7h00 às 16h30)",
+    horario: "Segunda a Sexta: 7h às 17h | Sábado: 7h às 11h",
     telefone: "(21) 3668-3100",
     whatsapp: "552136683100",
     especialidades: [
@@ -48,11 +48,11 @@ const REDE_CREDENCIADA = [
     descricao: "Informamos que devido ao fechamento da unidade de Guadalupe, o Cartão Amas credenciou a SEMERJ como clínica prestadora de serviços na região.",
     cidade: "Rio de Janeiro",
     bairro: "Guadalupe",
-    endereco: "Estr. do Camboatá, 2194 - Guadalupe, Rio de Janeiro - RJ",
-    horario: "Segunda à Sexta (7:30 às 17:00)",
+    endereco: "Estrada do Camboatá, 2194 - Guadalupe - RJ",
+    horario: "Segunda a Sexta: 7h às 17h | Sábado: 7h às 11h",
     telefone: "(21) 3106-6225",
     whatsapp: "5521965065077",
-    especialidades: ["Urologia"], // <-- Ajustado para conter SOMENTE Urologia
+    especialidades: ["Urologia"],
     mapaEmbed: "https://maps.google.com/maps?q=Estr.%20do%20Camboat%C3%A3%2C%202194%20-%20Guadalupe%2C%20Rio%20de%20Janeiro%20-%20RJ&t=&z=15&ie=UTF8&iwloc=&output=embed"
   },
   {
@@ -72,144 +72,44 @@ const REDE_CREDENCIADA = [
   }
 ];
 
-// 2. DATA: PARCEIROS DE VANTAGENS EXTRAÍDOS DOS FOLHETOS (REDE CONVENIADA)
+// DATA: PARCEIROS DE VANTAGENS (REDE CONVENIADA)
 const LISTA_PARCEIROS = [
-  {
-    nome: "Droga Raia",
-    categoria: "Farmácia",
-    desconto: "Até 50%",
-    sufixoDesconto: "de desconto",
-    descricao: "Ser AMAS é cuidar da sua saúde com mais economia, benefícios e praticidade nas unidades da Raia.",
-    icone: <Pill className="w-8 h-8 text-red-600" />
-  },
-  {
-    nome: "Drogarias PoupeRio — Pavuna",
-    categoria: "Farmácia",
-    desconto: "Até 70%",
-    sufixoDesconto: "de desconto",
-    descricao: "Quem é AMAS encontra aqui mais cuidado, economia e praticidade para a saúde e o bem-estar do dia a dia.",
-    icone: <Pill className="w-8 h-8 text-red-500" />
-  },
-  {
-    nome: "Drogarias Pacheco",
-    categoria: "Farmácia",
-    desconto: "Até 50%",
-    sufixoDesconto: "de desconto",
-    descricao: "Ser AMAS é ter acesso a mais cuidado, conveniência e benefícios em saúde nas unidades da Drogarias Pacheco.",
-    icone: <Pill className="w-8 h-8 text-blue-500" />
-  },
-  {
-    nome: "Pharma Zoe",
-    categoria: "Farmácia",
-    desconto: "10%",
-    sufixoDesconto: "de desconto",
-    descricao: "Quem tem AMAS tem acesso a cuidado personalizado na Pharma Zoe, com soluções feitas sob medida para você.",
-    icone: <Pill className="w-8 h-8 text-pink-500" />
-  },
-  {
-    nome: "Colégio Mercúrio",
-    categoria: "Educação",
-    desconto: "Até 40%",
-    sufixoDesconto: "de desconto",
-    descricao: "Com AMAS, a educação ganha mais acesso, qualidade e oportunidades no Colégio Mercúrio.",
-    icone: <GraduationCap className="w-8 h-8 text-amber-700" />
-  },
-  {
-    nome: "Digital Nave",
-    categoria: "Educação",
-    desconto: "50%",
-    sufixoDesconto: "de desconto na matrícula",
-    descricao: "Os associados AMAS ampliam sua capacitação profissional de forma completa, online e acessível no Digital Nave.",
-    icone: <GraduationCap className="w-8 h-8 text-indigo-600" />
-  },
-  {
-    nome: "YES! Idiomas",
-    categoria: "Educação",
-    desconto: "Bolsa de 50%",
-    sufixoDesconto: "de desconto",
-    descricao: "Com AMAS, o aprendizado de idiomas alcança uma excelência e comunicação prática desde a primeira aula na Yes! Idiomas.",
-    icone: <GraduationCap className="w-8 h-8 text-red-600" />
-  },
-  {
-    nome: "Saúde Pés e Mãos",
-    categoria: "Bem-estar e Saúde",
-    desconto: "15%",
-    sufixoDesconto: "de desconto",
-    descricao: "Ser AMAS garante mais cuidado, prevenção e saúde completa para mãos e pés na Saúde Pés e Mãos.",
-    icone: <Sparkles className="w-8 h-8 text-emerald-600" />
-  },
-  {
-    nome: "Ative Life Cosméticos",
-    categoria: "Bem-estar e Saúde",
-    desconto: "Até 20%",
-    sufixoDesconto: "de desconto",
-    descricao: "Ter AMAS é desfrutar de cuidado e relaxamento que transformam a rotina em um verdadeiro ritual de SPA com a Ative Life.",
-    icone: <Sparkles className="w-8 h-8 text-purple-600" />
-  },
-  {
-    nome: "Ótica Boa Visão",
-    categoria: "Ótica",
-    desconto: "A partir de 15%",
-    sufixoDesconto: "de desconto",
-    descricao: "Quem tem AMAS tem mais cuidado com a visão, qualidade e bem-estar na Ótica Boa Visão de Meriti.",
-    icone: <Glasses className="w-8 h-8 text-blue-600" />
-  },
-  {
-    nome: "Hospital Daniel Lipp",
-    categoria: "Emergência",
-    desconto: "20%",
-    sufixoDesconto: "de desconto",
-    descricao: "Quem tem AMAS conta com atendimento de emergência a qualquer hora com segurança e cuidado no Hospital Daniel Lipp.",
-    icone: <HeartPulse className="w-8 h-8 text-cyan-700" />
-  },
-  {
-    nome: "Raquel Groomer",
-    categoria: "Pet Service",
-    desconto: "Até 20%",
-    sufixoDesconto: "de desconto",
-    descricao: "Ser AMAS é cuidado contínuo e bem-estar para o seu pet com carinho e excelência na Raquel Groomer.",
-    icone: <Scissors className="w-8 h-8 text-gray-700" />
-  }
+  { nome: "Droga Raia", categoria: "Farmácia", desconto: "Até 50%", sufixoDesconto: "de desconto", descricao: "Ser AMAS é cuidar da sua saúde com mais economia, benefícios e praticidade nas unidades da Raia.", icone: <Pill className="w-8 h-8 text-red-600" /> },
+  { nome: "Drogarias PoupeRio — Pavuna", categoria: "Farmácia", desconto: "Até 70%", sufixoDesconto: "de desconto", descricao: "Quem é AMAS encontra aqui mais cuidado, economia e praticidade para a saúde e o bem-estar do dia a dia.", icone: <Pill className="w-8 h-8 text-red-500" /> },
+  { nome: "Drogarias Pacheco", categoria: "Farmácia", desconto: "Até 50%", sufixoDesconto: "de desconto", descricao: "Ser AMAS é ter acesso a mais cuidado, conveniência e benefícios em saúde nas unidades da Drogarias Pacheco.", icone: <Pill className="w-8 h-8 text-blue-500" /> },
+  { nome: "Pharma Zoe", categoria: "Farmácia", desconto: "10%", sufixoDesconto: "de desconto", descricao: "Quem tem AMAS tem acesso a cuidado personalizado na Pharma Zoe, com soluções feitas sob medida para você.", icone: <Pill className="w-8 h-8 text-pink-500" /> },
+  { nome: "Colégio Mercúrio", categoria: "Educação", desconto: "Até 40%", sufixoDesconto: "de desconto", descricao: "Com AMAS, a educação ganha mais acesso, qualidade e oportunidades no Colégio Mercúrio.", icone: <GraduationCap className="w-8 h-8 text-amber-700" /> },
+  { nome: "Digital Nave", categoria: "Educação", desconto: "50%", sufixoDesconto: "de desconto na matrícula", descricao: "Os associados AMAS ampliam sua capacitação profissional de forma completa, online e acessível no Digital Nave.", icone: <GraduationCap className="w-8 h-8 text-indigo-600" /> },
+  { nome: "YES! Idiomas", categoria: "Educação", desconto: "Bolsa de 50%", sufixoDesconto: "de desconto", descricao: "Com AMAS, o aprendizado de idiomas alcança uma excelência e comunicação prática desde a primeira aula na Yes! Idiomas.", icone: <GraduationCap className="w-8 h-8 text-red-600" /> },
+  { nome: "Saúde Pés e Mãos", categoria: "Bem-estar e Saúde", desconto: "15%", sufixoDesconto: "de desconto", descricao: "Ser AMAS garante mais cuidado, prevenção e saúde completa para mãos e pés na Saúde Pés e Mãos.", icone: <Sparkles className="w-8 h-8 text-emerald-600" /> },
+  { nome: "Ative Life Cosméticos", categoria: "Bem-estar e Saúde", desconto: "Até 20%", sufixoDesconto: "de desconto", descricao: "Ter AMAS é desfrutar de cuidado e relaxamento que transformam a rotina em um verdadeiro ritual de SPA com a Ative Life.", icone: <Sparkles className="w-8 h-8 text-purple-600" /> },
+  { nome: "Ótica Boa Visão", categoria: "Ótica", desconto: "A partir de 15%", sufixoDesconto: "de desconto", descricao: "Quem tem AMAS tem mais cuidado com a visão, quality e bem-estar na Ótica Boa Visão de Meriti.", icone: <Glasses className="w-8 h-8 text-blue-600" /> },
+  { nome: "Hospital Daniel Lipp", categoria: "Emergência", desconto: "20%", sufixoDesconto: "de desconto", descricao: "Quem tem AMAS conta com atendimento de emergência a qualquer hora com segurança e cuidado no Hospital Daniel Lipp.", icone: <HeartPulse className="w-8 h-8 text-cyan-700" /> },
+  { nome: "Raquel Groomer", categoria: "Pet Service", desconto: "Até 20%", sufixoDesconto: "de desconto", descricao: "Ser AMAS é cuidado contínuo e bem-estar para o seu pet com carinho e excelência na Raquel Groomer.", icone: <Scissors className="w-8 h-8 text-gray-700" /> }
 ];
 
-export default function AmasParceirosPage({ setPaginaAtiva }) {
-  const [categoriaAtiva, setCategoriaAtiva] = useState('Todos');
-
-  const categorias = ['Todos', 'Farmácia', 'Educação', 'Bem-estar e Saúde', 'Ótica', 'Emergência', 'Pet Service'];
-
-  const parceirosFiltrados = categoriaAtiva === 'Todos' 
-    ? LISTA_PARCEIROS 
-    : LISTA_PARCEIROS.filter(p => p.categoria === categoriaAtiva);
-
+// TELA 1: SOMENTE UNIDADES MÉDICAS (REDE)
+export function AmasRedePage({ setPaginaAtiva }) {
   return (
     <div className="bg-[#f4f6f9] pb-16 font-sans text-[#2c3e50] antialiased">
-      
-      {/* BANNER */}
-      <section className="bg-[#0b1f52] text-white py-10 sm:py-14 px-4 sm:px-6 lg:px-8 relative text-center sm:text-left">
+      <section className="bg-[#0b1f52] text-white py-10 sm:py-14 px-4 sm:px-6 lg:px-8 text-center sm:text-left">
         <div className="max-w-5xl mx-auto space-y-2">
           <div className="flex items-center justify-center sm:justify-start space-x-2 text-xs text-gray-400 font-medium">
             <span onClick={() => setPaginaAtiva('inicio')} className="hover:text-white transition-colors cursor-pointer">Início</span>
             <ChevronRight className="w-3 h-3" />
-            <span className="text-[#ff6b00] font-semibold">Parceiros</span>
+            <span className="text-[#ff6b00] font-semibold">Rede</span>
           </div>
-          <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight">Rede de Parceiros</h1>
+          <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight">Rede de Atendimento</h1>
           <p className="text-gray-300 text-xs sm:text-base max-w-xl font-normal">
-            Consulte a nossa ampla rede credenciada de clínicas, laboratórios e atendimento médico especializado.
+            Consulte a localização e as especialidades das nossas unidades oficiais de atendimento.
           </p>
         </div>
       </section>
 
-      {/* SECÇÃO 1: UNIDADES MÉDICAS */}
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex items-center space-x-3 mb-6 justify-center sm:justify-start">
-          <div className="w-1.5 h-6 bg-[#ff6b00] rounded-full" />
-          <h2 className="text-xl sm:text-2xl font-black text-[#0b1f52] tracking-tight">Clínicas e Unidades Médicas</h2>
-        </div>
-
         <div className="space-y-6">
           {REDE_CREDENCIADA.map((parceiro) => (
             <div key={parceiro.id} className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col">
-              
               <div className="p-4 sm:p-6 flex flex-col md:flex-row justify-between gap-4 md:gap-6 pb-2">
                 <div className="space-y-2 flex-1 text-justify sm:text-left">
                   <div className="flex items-start sm:items-center space-x-2">
@@ -218,7 +118,6 @@ export default function AmasParceirosPage({ setPaginaAtiva }) {
                   </div>
                   <p className="text-gray-600 text-xs sm:text-base leading-relaxed">{parceiro.descricao}</p>
                 </div>
-
                 <div className="md:w-64 flex flex-col justify-between border-t md:border-t-0 md:border-l border-gray-100 pt-4 md:pt-0 md:pl-5 shrink-0 space-y-4">
                   <div className="space-y-1">
                     <div className="flex items-center space-x-1 text-[#0b1f52] font-bold text-sm">
@@ -227,132 +126,92 @@ export default function AmasParceirosPage({ setPaginaAtiva }) {
                     </div>
                     <p className="text-xs text-gray-400 leading-relaxed">{parceiro.endereco}</p>
                   </div>
-
-                  <a 
-                    href={`https://wa.me/${parceiro.whatsapp}?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%2C%20vim%20pelo%20site%20do%20Cart%C3%A3o%20Amas.`}
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="w-full bg-[#0b1f52] hover:bg-[#ff6b00] text-white py-3 px-4 rounded-xl text-xs font-bold flex items-center justify-center space-x-1 transition-all shadow-sm text-center"
-                  >
-                    <span>Entrar em Contato</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 opacity-80" />
+                  <a href={`https://wa.me/${parceiro.whatsapp}?text=Ol%C3%A1`} target="_blank" rel="noreferrer" className="w-full bg-[#0b1f52] hover:bg-[#ff6b00] text-white py-3 px-4 rounded-xl text-xs font-bold flex items-center justify-center space-x-1 transition-all shadow-sm">
+                    <span>Entrar em Contato</span><ArrowUpRight className="w-3.5 h-3.5" />
                   </a>
                 </div>
               </div>
-
-              {/* ESPECIALIDADES OFERECIDAS */}
               <div className="px-4 sm:px-6 pb-4">
                 <div className="bg-[#f8fafc] border border-gray-100 rounded-xl p-4 sm:p-5 space-y-3">
-                  <h3 className="text-xs font-bold text-[#0b1f52] uppercase tracking-wider">
-                    Especialidades Oferecidas:
-                  </h3>
-                  
+                  <h3 className="text-xs font-bold text-[#0b1f52] uppercase tracking-wider">Especialidades Oferecidas:</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-2">
                     {parceiro.especialidades.map((esp, i) => (
                       <div key={i} className="flex items-center space-x-2 text-xs sm:text-[14px] text-gray-700 font-medium">
-                        <span className="text-[#ff6b00] font-bold text-[9px] shrink-0">►</span>
-                        <span className="truncate" title={esp}>{esp}</span>
+                        <span className="text-[#ff6b00] font-bold text-[9px]">►</span>
+                        <span className="truncate">{esp}</span>
                       </div>
                     ))}
                   </div>
                 </div>
-
-                <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 pt-3 text-xs sm:text-sm text-gray-500 font-medium px-1">
-                  <div className="flex items-center space-x-1.5">
-                    <Clock className="w-4 h-4 text-[#ff6b00] shrink-0" />
-                    <span><strong>Horário:</strong> {parceiro.horario}</span>
-                  </div>
-                  <div className="flex items-center space-x-1.5">
-                    <Phone className="w-4 h-4 text-[#ff6b00] shrink-0" />
-                    <span><strong>Telefone:</strong> {parceiro.telefone}</span>
-                  </div>
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 pt-3 text-xs sm:text-sm text-gray-500 font-medium">
+                  <div className="flex items-center space-x-1.5"><Clock className="w-4 h-4 text-[#ff6b00]" /><span><strong>Horário:</strong> {parceiro.horario}</span></div>
+                  <div className="flex items-center space-x-1.5"><Phone className="w-4 h-4 text-[#ff6b00]" /><span><strong>Telefone:</strong> {parceiro.telefone}</span></div>
                 </div>
               </div>
-
-              {/* MAPA */}
-              <div className="border-t border-gray-100 bg-gray-50 p-3 sm:p-4">
-                <div className="w-full h-48 sm:h-64 rounded-lg overflow-hidden shadow-inner border border-gray-200 bg-gray-100">
-                  <iframe
-                    src={parceiro.mapaEmbed}
-                    className="w-full h-full border-0"
-                    allowFullScreen=""
-                    loading="lazy"
-                    title={`Mapa da Unidade ${parceiro.nome}`}
-                  />
+              <div className="border-t border-gray-100 bg-gray-50 p-4">
+                <div className="w-full h-48 sm:h-64 rounded-lg overflow-hidden border border-gray-200">
+                  <iframe src={parceiro.mapaEmbed} className="w-full h-full border-0" allowFullScreen="" loading="lazy" title={parceiro.nome} />
                 </div>
               </div>
-
             </div>
           ))}
         </div>
       </main>
+    </div>
+  );
+}
 
-      {/* SECÇÃO 2: PARCEIROS DE VANTAGENS */}
+// TELA 2: SOMENTE REDE CONVENIADA E DESCONTOS (BENEFÍCIOS)
+export function AmasBeneficiosPage({ setPaginaAtiva }) {
+  const [categoriaAtiva, setCategoriaAtiva] = useState('Todos');
+  const categorias = ['Todos', 'Farmácia', 'Educação', 'Bem-estar e Saúde', 'Ótica', 'Emergência', 'Pet Service'];
+  const parceirosFiltrados = categoriaAtiva === 'Todos' ? LISTA_PARCEIROS : LISTA_PARCEIROS.filter(p => p.categoria === categoriaAtiva);
+
+  return (
+    <div className="bg-[#f4f6f9] pb-16 font-sans text-[#2c3e50] antialiased">
+      <section className="bg-[#0b1f52] text-white py-10 sm:py-14 px-4 sm:px-6 lg:px-8 text-center sm:text-left">
+        <div className="max-w-5xl mx-auto space-y-2">
+          <div className="flex items-center justify-center sm:justify-start space-x-2 text-xs text-gray-400 font-medium">
+            <span onClick={() => setPaginaAtiva('inicio')} className="hover:text-white transition-colors cursor-pointer">Início</span>
+            <ChevronRight className="w-3 h-3" />
+            <span className="text-[#ff6b00] font-semibold">Benefícios</span>
+          </div>
+          <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight">Vantagens e Benefícios</h1>
+          <p className="text-gray-300 text-xs sm:text-base max-w-xl font-normal">
+            Aproveite descontos exclusivos em nossa ampla rede de parceiros conveniados.
+          </p>
+        </div>
+      </section>
+
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-gray-200 pb-4 gap-4">
-          <div className="flex items-center space-x-3 justify-center sm:justify-start shrink-0">
+          <div className="flex items-center space-x-3 justify-center sm:justify-start">
             <div className="w-1.5 h-6 bg-[#ff6b00] rounded-full" />
             <h2 className="text-xl sm:text-2xl font-black text-[#0b1f52] tracking-tight">Rede Conveniada e Descontos</h2>
           </div>
-
-          <div className="flex items-center space-x-1.5 overflow-x-auto pb-2 sm:pb-0 scrollbar-none justify-start">
+          <div className="flex items-center space-x-1.5 overflow-x-auto pb-2 sm:pb-0 scrollbar-none">
             {categorias.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setCategoriaAtiva(cat)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer border ${
-                  categoriaAtiva === cat
-                    ? 'bg-[#0b1f52] text-white border-[#0b1f52] shadow-sm'
-                    : 'bg-white text-[#0b1f52] border-gray-200 hover:border-[#ff6b00] hover:text-[#ff6b00]'
-                }`}
-              >
-                {cat}
-              </button>
+              <button key={cat} onClick={() => setCategoriaAtiva(cat)} className={`px-3 py-1.5 rounded-xl text-xs font-bold border cursor-pointer transition-all ${categoriaAtiva === cat ? 'bg-[#0b1f52] text-white border-[#0b1f52]' : 'bg-white text-[#0b1f52] border-gray-200 hover:border-[#ff6b00]'}`}>{cat}</button>
             ))}
           </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-8">
           {parceirosFiltrados.map((parceiro, idx) => (
-            <div 
-              key={idx} 
-              className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 group"
-            >
-              <div className="p-6 flex flex-col items-center text-center justify-center bg-white flex-grow min-h-[140px]">
-                <div className="p-3.5 bg-gray-50 rounded-xl group-hover:scale-105 transition-transform duration-300">
-                  {parceiro.icone}
-                </div>
-                <h3 className="mt-3 font-bold text-lg text-[#0b1f52] tracking-tight">
-                  {parceiro.nome}
-                </h3>
+            <div key={idx} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-md transition-all group">
+              <div className="p-6 flex flex-col items-center text-center justify-center flex-grow min-h-[140px]">
+                <div className="p-3.5 bg-gray-50 rounded-xl group-hover:scale-105 transition-transform">{parceiro.icone}</div>
+                <h3 className="mt-3 font-bold text-lg text-[#0b1f52] tracking-tight">{parceiro.nome}</h3>
               </div>
-
-              <div className="flex justify-center -mb-3 relative z-10">
-                <span className="bg-[#0b1f52] text-white font-bold text-[11px] px-4 py-1 rounded-full shadow-sm">
-                  {parceiro.categoria}
-                </span>
-              </div>
-
+              <div className="flex justify-center -mb-3 relative z-10"><span className="bg-[#0b1f52] text-white font-bold text-[11px] px-4 py-1 rounded-full">{parceiro.categoria}</span></div>
               <div className="bg-[#ff6b00] text-white p-5 pt-6 flex flex-col items-center text-center space-y-2">
-                <div className="text-white font-medium text-xs">
-                  Até <span className="text-2xl font-black mx-0.5 tracking-tighter text-white">{parceiro.desconto.replace('Até ', '')}</span> {parceiro.sufixoDesconto}
-                </div>
-                <p className="text-[11px] text-orange-50 leading-relaxed max-w-xs opacity-90">
-                  {parceiro.descricao}
-                </p>
+                <div className="text-white font-medium text-xs">Até <span className="text-2xl font-black tracking-tighter">{parceiro.desconto.replace('Até ', '')}</span> {parceiro.sufixoDesconto}</div>
+                <p className="text-[11px] opacity-90">{parceiro.descricao}</p>
               </div>
             </div>
           ))}
         </div>
-
-        {parceirosFiltrados.length === 0 && (
-          <div className="text-center py-12 bg-white rounded-2xl border border-gray-100 max-w-sm mx-auto mt-6 space-y-2">
-            <LayoutGrid className="w-8 h-8 text-gray-300 mx-auto" />
-            <p className="text-gray-400 font-medium text-sm">Nenhum parceiro nesta categoria.</p>
-          </div>
-        )}
       </section>
-
     </div>
   );
 }
