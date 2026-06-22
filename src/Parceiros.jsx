@@ -33,8 +33,8 @@ const REDE_CREDENCIADA = [
     bairro: "Centro",
     endereco: "Rua Arruda Negreiros, 11 - Centro, Duque de Caxias - RJ",
     horario: "Segunda à Sexta (7:30 às 17:00)",
-    telefone: "(21) 2652-5991",
-    whatsapp: "552126525991",
+    telefone: "(21) 3668-3100",
+    whatsapp: "552136683100",
     especialidades: [
       "Clínica Geral", "Ginecologia", "Cardiologia", "Mastologista",
       "Dermatologia", "Ortopedia", "Endocrinologia", "Pediatria",
@@ -240,7 +240,7 @@ export default function AmasParceirosPage({ setPaginaAtiva }) {
                     rel="noreferrer"
                     className="w-full bg-[#0b1f52] hover:bg-[#ff6b00] text-white py-3 px-4 rounded-xl text-xs font-bold flex items-center justify-center space-x-1 transition-all shadow-sm text-center"
                   >
-                    <span>Entrar em Contato</span>
+                    <span>WhatsApp</span>
                     <ArrowUpRight className="w-3.5 h-3.5 opacity-80" />
                   </a>
                 </div>

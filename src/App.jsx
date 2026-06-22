@@ -11,6 +11,8 @@ import iconeAmas from './icone-amas.png';
 import AmasParceirosPage from './Parceiros.jsx';
 import AmasContatoPage from './Contato.jsx';
 import AmasAnexosPage from './Anexos.jsx';
+import AmasAgendamentoPage from './Agendamento.jsx';
+import AmasPlanosPage from './Planos.jsx'; // <-- Importação do novo arquivo de planos
 
 export default function App() {
   const [paginaAtiva, setPaginaAtiva] = useState('inicio');
@@ -27,7 +29,7 @@ export default function App() {
 
   const URL_BOLETO = "https://www.cartaoamas.com.br/AliancaAppNet2/Site/autenticacao/login?t=cpf";
   const URL_LOGIN = "https://www.cartaoamas.com.br/AliancaAppNet2/Site/site";
-  const URL_WHATSAPP = "https://wa.me/552136683100?text=Ol%C3%A1%2C%20eu%20vim%20do%20site%20Cart%C3%A3o%20Amas%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%2C";
+  const URL_WHATSAPP = "https://wa.me/552136683100?text=Ol%C3%A1%2C%20eu%20vim%20do%20site%20Cart%C3%A3o%20Amas%20e%20gostaria%20de%20mais%20informa%C3%A7%B5es%2C";
 
   // Transição fluida entre as páginas com o loading
   const navegarPara = (pagina) => {
@@ -42,9 +44,9 @@ export default function App() {
   // Array centralizado para garantir consistência total de estilos (Desktop e Mobile)
   const LINKS_NAVEGACAO = [
     { id: 'inicio', label: 'Início' },
-    { id: 'inicio', label: 'Planos' },
+    { id: 'planos', label: 'Planos' }, // <-- Ativado id único de planos para rota funcional
     { id: 'parceiros', label: 'Parceiros' },
-    { id: 'inicio', label: 'Agendamento' },
+    { id: 'agendamento', label: 'Agendamento' },
     { id: 'anexos', label: 'Anexos' },
     { id: 'contato', label: 'Contato' }
   ];
@@ -52,7 +54,9 @@ export default function App() {
   // Lógica para verificar qual item está visualmente ativo
   const verificarSeLinkAtivo = (label) => {
     if (label === 'Início' && paginaAtiva === 'inicio') return true;
+    if (label === 'Planos' && paginaAtiva === 'planos') return true;
     if (label === 'Parceiros' && paginaAtiva === 'parceiros') return true;
+    if (label === 'Agendamento' && paginaAtiva === 'agendamento') return true;
     if (label === 'Anexos' && paginaAtiva === 'anexos') return true;
     if (label === 'Contato' && paginaAtiva === 'contato') return true;
     return false;
@@ -181,7 +185,7 @@ export default function App() {
                 <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight max-w-4xl">Cuidando da Sua Saúde com Carinho e Economia.</h1>
                 <p className="text-base sm:text-xl text-gray-200 font-medium max-w-2xl">Acesso facilitado a uma ampla rede de saúde sem burocracia.</p>
                 <div className="pt-2">
-                  <button onClick={() => navegarPara('parceiros')} className="w-full sm:w-auto bg-[#ff6b00] hover:bg-[#e05e00] text-white font-bold px-8 py-4 rounded-xl sm:rounded-full shadow-xl text-md sm:text-lg transition-all transform hover:scale-105 cursor-pointer">Ver Rede Credenciada</button>
+                  <button onClick={() => navegarPara('planos')} className="w-full sm:w-auto bg-[#ff6b00] hover:bg-[#e05e00] text-white font-bold px-8 py-4 rounded-xl sm:rounded-full shadow-xl text-md sm:text-lg transition-all transform hover:scale-105 cursor-pointer">Ver Nossos Planos</button>
                 </div>
               </div>
             </section>
@@ -195,15 +199,12 @@ export default function App() {
                     <h2 className="text-2xl sm:text-3xl font-black text-[#0b1f52] tracking-tight">Sobre o Cartão Amas</h2>
                   </div>
                   <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-normal">O Cartão Amas é a sua melhor alternativa para cuidar da saúde com inteligência. Oferecemos uma experiência transparente, ágil e humana.</p>
-                  
-                  {/* TEXTO ATUALIZADO CONFORME SOLICITADO */}
                   <div className="bg-blue-50/70 border-l-4 border-blue-600 p-4 sm:p-5 rounded-r-2xl shadow-sm text-left">
                     <p className="text-blue-900 font-medium italic text-sm sm:text-base leading-relaxed">
                       "Importante: Somos um cartão de benefícios para Assistência Médica, o que nos permite oferecer maior flexibilidade e condições diferenciadas para nossos pacientes."
                     </p>
                   </div>
                 </div>
-                
                 <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {[
                     { icon: <Check className="w-6 h-6 text-emerald-500" />, title: "Consulta médica sem carência" },
@@ -220,10 +221,14 @@ export default function App() {
               </div>
             </section>
           </>
+        ) : paginaAtiva === 'planos' ? (
+          <AmasPlanosPage setPaginaAtiva={navegarPara} /> // <-- Ativada a renderização da tela de planos
         ) : paginaAtiva === 'parceiros' ? (
           <AmasParceirosPage setPaginaAtiva={navegarPara} />
         ) : paginaAtiva === 'anexos' ? (
           <AmasAnexosPage setPaginaAtiva={navegarPara} />
+        ) : paginaAtiva === 'agendamento' ? (
+          <AmasAgendamentoPage setPaginaAtiva={navegarPara} />
         ) : (
           <AmasContatoPage setPaginaAtiva={navegarPara} />
         )}
@@ -245,7 +250,7 @@ export default function App() {
             <h4 className="text-[14px] font-bold text-white uppercase tracking-wider">Navegação</h4>
             <div className="flex flex-col space-y-2 text-[14px]">
               <button onClick={() => navegarPara('inicio')} className="hover:text-white transition-colors cursor-pointer text-center sm:text-left">Home</button>
-              <button onClick={() => navegarPara('inicio')} className="hover:text-white transition-colors cursor-pointer text-center sm:text-left">Planos</button>
+              <button onClick={() => navegarPara('planos')} className="hover:text-white transition-colors cursor-pointer text-center sm:text-left">Planos</button>
               <button onClick={() => navegarPara('parceiros')} className="hover:text-white transition-colors cursor-pointer text-center sm:text-left">Parceiros</button>
             </div>
           </div>
@@ -253,7 +258,7 @@ export default function App() {
           <div className="space-y-3">
             <h4 className="text-[14px] font-bold text-white uppercase tracking-wider">Serviços</h4>
             <div className="flex flex-col space-y-2 text-[14px]">
-              <button onClick={() => navegarPara('inicio')} className="hover:text-white transition-colors cursor-pointer text-center sm:text-left">Agendamento</button>
+              <button onClick={() => navegarPara('agendamento')} className="hover:text-white transition-colors cursor-pointer text-center sm:text-left">Agendamento</button>
               <button onClick={() => navegarPara('anexos')} className="hover:text-white transition-colors cursor-pointer text-center sm:text-left">Anexos</button>
               <button onClick={() => navegarPara('contato')} className="hover:text-white transition-colors cursor-pointer text-center sm:text-left">Contato</button>
             </div>
@@ -269,7 +274,7 @@ export default function App() {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 mt-8 border-t border-white/10 text-center flex flex-col space-y-2 sm:space-y-0 text-xs sm:text-[13px] text-[#a5b4fc]/60">
-          <p>Copyright © 2025 AMAS MULTI SAUDE LTDA. Todos os direitos reservados.</p>
+          <p>Copyright © 2026 AMAS MULTI SAUDE LTDA. Todos os direitos reservados.</p>
           <p className="text-[14px] text-white/90 font-medium pt-1">
             Desenvolvido por <span className="text-[#ff6b00] font-bold tracking-wide">Íon Digital</span>
           </p>
