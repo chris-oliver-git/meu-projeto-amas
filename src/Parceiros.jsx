@@ -33,8 +33,8 @@ const REDE_CREDENCIADA = [
     bairro: "Centro",
     endereco: "Rua Arruda Negreiros, 11 - Centro, Duque de Caxias - RJ",
     horario: "Segunda à Sexta (7:30 às 17:00)",
-    telefone: "(21) 3668-3100",
-    whatsapp: "552136683100",
+    telefone: "(21) 2652-5991",
+    whatsapp: "552126525991",
     especialidades: [
       "Clínica Geral", "Ginecologia", "Cardiologia", "Mastologista",
       "Dermatologia", "Ortopedia", "Endocrinologia", "Pediatria",
@@ -52,11 +52,7 @@ const REDE_CREDENCIADA = [
     horario: "Segunda à Sexta (7:30 às 17:00)",
     telefone: "(21) 3106-6225",
     whatsapp: "5521965065077",
-    especialidades: [
-      "Alergista", "Clínica Geral", "Cardiologia", "Dermatologia",
-      "Endocrinologia", "Gastroenterologia", "Ginecologia", "Nutrição",
-      "Neurologia", "Ortopedia", "Pediatria", "Urologia", "Psiquiatria"
-    ],
+    especialidades: ["Urologia"], // <-- Ajustado para conter SOMENTE Urologia
     mapaEmbed: "https://maps.google.com/maps?q=Estr.%20do%20Camboat%C3%A3%2C%202194%20-%20Guadalupe%2C%20Rio%20de%20Janeiro%20-%20RJ&t=&z=15&ie=UTF8&iwloc=&output=embed"
   },
   {
@@ -188,7 +184,7 @@ export default function AmasParceirosPage({ setPaginaAtiva }) {
   return (
     <div className="bg-[#f4f6f9] pb-16 font-sans text-[#2c3e50] antialiased">
       
-      {/* BANNER REORGANIZADO */}
+      {/* BANNER */}
       <section className="bg-[#0b1f52] text-white py-10 sm:py-14 px-4 sm:px-6 lg:px-8 relative text-center sm:text-left">
         <div className="max-w-5xl mx-auto space-y-2">
           <div className="flex items-center justify-center sm:justify-start space-x-2 text-xs text-gray-400 font-medium">
@@ -203,7 +199,7 @@ export default function AmasParceirosPage({ setPaginaAtiva }) {
         </div>
       </section>
 
-      {/* SECÇÃO 1: UNIDADES MÉDICAS (REDE CREDENCIADA) */}
+      {/* SECÇÃO 1: UNIDADES MÉDICAS */}
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex items-center space-x-3 mb-6 justify-center sm:justify-start">
           <div className="w-1.5 h-6 bg-[#ff6b00] rounded-full" />
@@ -214,7 +210,6 @@ export default function AmasParceirosPage({ setPaginaAtiva }) {
           {REDE_CREDENCIADA.map((parceiro) => (
             <div key={parceiro.id} className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col">
               
-              {/* Bloco Superior Informações */}
               <div className="p-4 sm:p-6 flex flex-col md:flex-row justify-between gap-4 md:gap-6 pb-2">
                 <div className="space-y-2 flex-1 text-justify sm:text-left">
                   <div className="flex items-start sm:items-center space-x-2">
@@ -224,7 +219,6 @@ export default function AmasParceirosPage({ setPaginaAtiva }) {
                   <p className="text-gray-600 text-xs sm:text-base leading-relaxed">{parceiro.descricao}</p>
                 </div>
 
-                {/* Bloco Lateral Reordenado */}
                 <div className="md:w-64 flex flex-col justify-between border-t md:border-t-0 md:border-l border-gray-100 pt-4 md:pt-0 md:pl-5 shrink-0 space-y-4">
                   <div className="space-y-1">
                     <div className="flex items-center space-x-1 text-[#0b1f52] font-bold text-sm">
@@ -240,7 +234,7 @@ export default function AmasParceirosPage({ setPaginaAtiva }) {
                     rel="noreferrer"
                     className="w-full bg-[#0b1f52] hover:bg-[#ff6b00] text-white py-3 px-4 rounded-xl text-xs font-bold flex items-center justify-center space-x-1 transition-all shadow-sm text-center"
                   >
-                    <span>WhatsApp</span>
+                    <span>Entrar em Contato</span>
                     <ArrowUpRight className="w-3.5 h-3.5 opacity-80" />
                   </a>
                 </div>
@@ -263,7 +257,6 @@ export default function AmasParceirosPage({ setPaginaAtiva }) {
                   </div>
                 </div>
 
-                {/* Metadados Horário/Telefone */}
                 <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 pt-3 text-xs sm:text-sm text-gray-500 font-medium px-1">
                   <div className="flex items-center space-x-1.5">
                     <Clock className="w-4 h-4 text-[#ff6b00] shrink-0" />
@@ -276,7 +269,7 @@ export default function AmasParceirosPage({ setPaginaAtiva }) {
                 </div>
               </div>
 
-              {/* MAPA RESPONSIVO */}
+              {/* MAPA */}
               <div className="border-t border-gray-100 bg-gray-50 p-3 sm:p-4">
                 <div className="w-full h-48 sm:h-64 rounded-lg overflow-hidden shadow-inner border border-gray-200 bg-gray-100">
                   <iframe
@@ -294,7 +287,7 @@ export default function AmasParceirosPage({ setPaginaAtiva }) {
         </div>
       </main>
 
-      {/* SECÇÃO 2: PARCEIROS DE VANTAGENS (REDE CONVENIADA) */}
+      {/* SECÇÃO 2: PARCEIROS DE VANTAGENS */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-gray-200 pb-4 gap-4">
           <div className="flex items-center space-x-3 justify-center sm:justify-start shrink-0">
@@ -302,7 +295,6 @@ export default function AmasParceirosPage({ setPaginaAtiva }) {
             <h2 className="text-xl sm:text-2xl font-black text-[#0b1f52] tracking-tight">Rede Conveniada e Descontos</h2>
           </div>
 
-          {/* Abas de Filtros Rápidos */}
           <div className="flex items-center space-x-1.5 overflow-x-auto pb-2 sm:pb-0 scrollbar-none justify-start">
             {categorias.map((cat) => (
               <button
@@ -320,14 +312,12 @@ export default function AmasParceirosPage({ setPaginaAtiva }) {
           </div>
         </div>
 
-        {/* Mosaico de Cards Comerciais */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-8">
           {parceirosFiltrados.map((parceiro, idx) => (
             <div 
               key={idx} 
               className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 group"
             >
-              {/* Topo do Card */}
               <div className="p-6 flex flex-col items-center text-center justify-center bg-white flex-grow min-h-[140px]">
                 <div className="p-3.5 bg-gray-50 rounded-xl group-hover:scale-105 transition-transform duration-300">
                   {parceiro.icone}
@@ -337,14 +327,12 @@ export default function AmasParceirosPage({ setPaginaAtiva }) {
                 </h3>
               </div>
 
-              {/* Tag Central */}
               <div className="flex justify-center -mb-3 relative z-10">
                 <span className="bg-[#0b1f52] text-white font-bold text-[11px] px-4 py-1 rounded-full shadow-sm">
                   {parceiro.categoria}
                 </span>
               </div>
 
-              {/* Base Laranja de Desconto */}
               <div className="bg-[#ff6b00] text-white p-5 pt-6 flex flex-col items-center text-center space-y-2">
                 <div className="text-white font-medium text-xs">
                   Até <span className="text-2xl font-black mx-0.5 tracking-tighter text-white">{parceiro.desconto.replace('Até ', '')}</span> {parceiro.sufixoDesconto}

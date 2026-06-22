@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   FileText, LogIn, CreditCard, Check, DollarSign, 
-  Building2, Heart, Clock, Wallet, Shield, Users, Stethoscope, Star,
-  Menu, X 
+  Building2, Heart, Clock, Menu, X 
 } from 'lucide-react';
 
 // Importação dos ativos locais
@@ -12,12 +11,33 @@ import AmasParceirosPage from './Parceiros.jsx';
 import AmasContatoPage from './Contato.jsx';
 import AmasAnexosPage from './Anexos.jsx';
 import AmasAgendamentoPage from './Agendamento.jsx';
-import AmasPlanosPage from './Planos.jsx'; // <-- Importação do novo arquivo de planos
+import AmasPlanosPage from './Planos.jsx';
 
 export default function App() {
-  const [paginaAtiva, setPaginaAtiva] = useState('inicio');
+  
+  // Função para detectar a URL acessada externamente
+  const obterPaginaPorUrl = () => {
+    const caminho = window.location.pathname.toLowerCase().replace(/^\/|\/$/g, '');
+    const rotasValidas = ['planos', 'parceiros', 'agendamento', 'anexos', 'contato'];
+    return rotasValidas.includes(caminho) ? caminho : 'inicio';
+  };
+
+  const [paginaAtiva, setPaginaAtiva] = useState(obterPaginaPorUrl);
   const [menuAberto, setMenuAberto] = useState(false);
   const [carregando, setCarregando] = useState(true);
+
+  // Sincronização do título da aba conforme a rota ativa
+  useEffect(() => {
+    const titulosDasPaginas = {
+      inicio: "Cartão Amas",
+      planos: "Cartão Amas | Planos",
+      parceiros: "Cartão Amas | Parceiros",
+      agendamento: "Cartão Amas | Agendamento",
+      anexos: "Cartão Amas | Anexos",
+      contato: "Cartão Amas | Contato"
+    };
+    document.title = titulosDasPaginas[paginaAtiva] || "Cartão Amas";
+  }, [paginaAtiva]);
 
   // Loading de inicialização ao abrir o site
   useEffect(() => {
@@ -31,27 +51,28 @@ export default function App() {
   const URL_LOGIN = "https://www.cartaoamas.com.br/AliancaAppNet2/Site/site";
   const URL_WHATSAPP = "https://wa.me/552136683100?text=Ol%C3%A1%2C%20eu%20vim%20do%20site%20Cart%C3%A3o%20Amas%20e%20gostaria%20de%20mais%20informa%C3%A7%B5es%2C";
 
-  // Transição fluida entre as páginas com o loading
   const navegarPara = (pagina) => {
     setMenuAberto(false);
     setCarregando(true);
+
+    const novaUrl = pagina === 'inicio' ? '/' : `/${pagina}`;
+    window.history.pushState({}, '', novaUrl);
+    
     setTimeout(() => {
       setPaginaAtiva(pagina);
       setCarregando(false);
     }, 600); 
   };
 
-  // Array centralizado para garantir consistência total de estilos (Desktop e Mobile)
   const LINKS_NAVEGACAO = [
     { id: 'inicio', label: 'Início' },
-    { id: 'planos', label: 'Planos' }, // <-- Ativado id único de planos para rota funcional
+    { id: 'planos', label: 'Planos' }, 
     { id: 'parceiros', label: 'Parceiros' },
     { id: 'agendamento', label: 'Agendamento' },
     { id: 'anexos', label: 'Anexos' },
     { id: 'contato', label: 'Contato' }
   ];
 
-  // Lógica para verificar qual item está visualmente ativo
   const verificarSeLinkAtivo = (label) => {
     if (label === 'Início' && paginaAtiva === 'inicio') return true;
     if (label === 'Planos' && paginaAtiva === 'planos') return true;
@@ -82,12 +103,10 @@ export default function App() {
       <header className="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
           
-          {/* Logo Oficial */}
           <div className="flex items-center cursor-pointer shrink-0" onClick={() => navegarPara('inicio')}>
             <img src={logoAmas} alt="Cartão Amas" className="h-11 sm:h-14 w-auto object-contain" />
           </div>
 
-          {/* MENU DESKTOP */}
           <nav className="hidden xl:flex items-center space-x-1">
             {LINKS_NAVEGACAO.map((item, idx) => {
               const ativo = verificarSeLinkAtivo(item.label);
@@ -105,7 +124,6 @@ export default function App() {
             })}
           </nav>
 
-          {/* BOTÕES DE AÇÃO DESKTOP */}
           <div className="hidden xl:flex items-center space-x-3 shrink-0">
             <a href={URL_BOLETO} target="_blank" rel="noreferrer" className="flex items-center space-x-1 border border-gray-300 hover:border-blue-600 px-4 py-2 rounded-full text-sm font-medium text-gray-700 hover:text-blue-600 transition-all shadow-sm bg-white">
               <FileText className="w-4 h-4 text-blue-600" />
@@ -121,7 +139,6 @@ export default function App() {
             </a>
           </div>
 
-          {/* INTERRUPTOR HAMBÚRGUER MOBILE */}
           <div className="flex items-center xl:hidden">
             <button 
               onClick={() => setMenuAberto(!menuAberto)}
@@ -133,7 +150,6 @@ export default function App() {
 
         </div>
 
-        {/* PAINEL HAMBÚRGUER MOBILE */}
         {menuAberto && (
           <div className="xl:hidden border-t border-gray-100 bg-white shadow-lg max-h-[calc(100vh-80px)] overflow-y-auto">
             <div className="px-4 pt-3 pb-6 space-y-2 flex flex-col">
@@ -175,17 +191,31 @@ export default function App() {
       <div className="flex-grow">
         {paginaAtiva === 'inicio' ? (
           <>
-            {/* HERO SECTION */}
-            <section className="relative bg-[#0b1f52] overflow-hidden min-h-[440px] sm:min-h-[520px] flex items-center px-4 sm:px-6">
+            {/* HERO SECTION - CORRIGIDO PARA .PNG */}
+            <section className="relative bg-[#0b1f52] overflow-hidden min-h-[500px] sm:min-h-[580px] flex items-center justify-center px-4 sm:px-6">
               <div className="absolute inset-0 z-0">
-                <img src="https://images.unsplash.com/photo-1581579438747-1dc8d1e0ca96?auto=format&fit=crop&q=80&w=1600" alt="Família" className="w-full h-full object-cover mix-blend-overlay opacity-30"/>
-                <div className="absolute inset-0 bg-gradient-to-b sm:bg-gradient-to-r from-[#0b1f52]/95 via-[#0b1f52]/80 to-transparent" />
+                <img 
+                  src="/familia-home.png" 
+                  alt="Família Amas" 
+                  className="w-full h-full object-cover mix-blend-multiply opacity-35"
+                />
+                <div className="absolute inset-0 bg-[#0b1f52]/40" />
               </div>
-              <div className="relative z-10 max-w-5xl mx-auto text-center sm:text-left py-12 sm:py-20 space-y-4 sm:space-y-6">
-                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight max-w-4xl">Cuidando da Sua Saúde com Carinho e Economia.</h1>
-                <p className="text-base sm:text-xl text-gray-200 font-medium max-w-2xl">Acesso facilitado a uma ampla rede de saúde sem burocracia.</p>
-                <div className="pt-2">
-                  <button onClick={() => navegarPara('planos')} className="w-full sm:w-auto bg-[#ff6b00] hover:bg-[#e05e00] text-white font-bold px-8 py-4 rounded-xl sm:rounded-full shadow-xl text-md sm:text-lg transition-all transform hover:scale-105 cursor-pointer">Ver Nossos Planos</button>
+              
+              <div className="relative z-10 max-w-4xl mx-auto text-center py-16 space-y-5 sm:space-y-6">
+                <h1 className="text-3xl sm:text-5xl lg:text-[54px] font-black text-white tracking-tight leading-[1.15] max-w-3xl mx-auto">
+                  Cuidando da Sua Saúde com Carinho e Economia.
+                </h1>
+                <p className="text-base sm:text-xl text-gray-200 font-medium max-w-2xl mx-auto leading-relaxed opacity-95">
+                  Acesso facilitado a uma ampla rede de saúde sem burocracia. Para você e toda sua família.
+                </p>
+                <div className="pt-4 flex justify-center">
+                  <button 
+                    onClick={() => navegarPara('planos')} 
+                    className="bg-[#ff6b00] hover:bg-[#e05e00] text-white font-black px-10 py-4 rounded-xl shadow-lg shadow-orange-950/30 text-md sm:text-lg transition-all transform hover:scale-105 active:scale-95 cursor-pointer"
+                  >
+                    Conheça Nossos Planos
+                  </button>
                 </div>
               </div>
             </section>
@@ -222,7 +252,7 @@ export default function App() {
             </section>
           </>
         ) : paginaAtiva === 'planos' ? (
-          <AmasPlanosPage setPaginaAtiva={navegarPara} /> // <-- Ativada a renderização da tela de planos
+          <AmasPlanosPage setPaginaAtiva={navegarPara} />
         ) : paginaAtiva === 'parceiros' ? (
           <AmasParceirosPage setPaginaAtiva={navegarPara} />
         ) : paginaAtiva === 'anexos' ? (
