@@ -49,7 +49,7 @@ export default function App() {
     { id: 'contato', label: 'Contato' }
   ];
 
-  // Lógica rigorosa para verificar qual item está visualmente ativo
+  // Lógica para verificar qual item está visualmente ativo
   const verificarSeLinkAtivo = (label) => {
     if (label === 'Início' && paginaAtiva === 'inicio') return true;
     if (label === 'Parceiros' && paginaAtiva === 'parceiros') return true;
@@ -83,7 +83,7 @@ export default function App() {
             <img src={logoAmas} alt="Cartão Amas" className="h-11 sm:h-14 w-auto object-contain" />
           </div>
 
-          {/* MENU DESKTOP - Totalmente Padronizado */}
+          {/* MENU DESKTOP */}
           <nav className="hidden xl:flex items-center space-x-1">
             {LINKS_NAVEGACAO.map((item, idx) => {
               const ativo = verificarSeLinkAtivo(item.label);
@@ -129,7 +129,7 @@ export default function App() {
 
         </div>
 
-        {/* PAINEL HAMBÚRGUER MOBILE - CORRIGIDO E 100% UNIFICADO */}
+        {/* PAINEL HAMBÚRGUER MOBILE */}
         {menuAberto && (
           <div className="xl:hidden border-t border-gray-100 bg-white shadow-lg max-h-[calc(100vh-80px)] overflow-y-auto">
             <div className="px-4 pt-3 pb-6 space-y-2 flex flex-col">
@@ -148,7 +148,6 @@ export default function App() {
                 );
               })}
               
-              {/* Botões de Ação na Base do Menu Mobile */}
               <div className="grid grid-cols-2 gap-2 pt-4 border-t border-gray-100">
                 <a href={URL_BOLETO} target="_blank" rel="noreferrer" className="flex items-center justify-center space-x-1 border border-gray-300 py-3 rounded-xl text-sm font-medium text-gray-700 bg-gray-50">
                   <FileText className="w-4 h-4 text-blue-600" />
@@ -196,10 +195,15 @@ export default function App() {
                     <h2 className="text-2xl sm:text-3xl font-black text-[#0b1f52] tracking-tight">Sobre o Cartão Amas</h2>
                   </div>
                   <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-normal">O Cartão Amas é a sua melhor alternativa para cuidar da saúde com inteligência. Oferecemos uma experiência transparente, ágil e humana.</p>
+                  
+                  {/* TEXTO ATUALIZADO CONFORME SOLICITADO */}
                   <div className="bg-blue-50/70 border-l-4 border-blue-600 p-4 sm:p-5 rounded-r-2xl shadow-sm text-left">
-                    <p className="text-blue-900 font-medium italic text-sm sm:text-base leading-relaxed">"Importante: Não possuímos registro na ANS, o que nos permite oferecer maior flexibilidade e condições diferenciadas."</p>
+                    <p className="text-blue-900 font-medium italic text-sm sm:text-base leading-relaxed">
+                      "Importante: Somos um cartão de benefícios para Assistência Médica, o que nos permite oferecer maior flexibilidade e condições diferenciadas para nossos pacientes."
+                    </p>
                   </div>
                 </div>
+                
                 <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {[
                     { icon: <Check className="w-6 h-6 text-emerald-500" />, title: "Consulta médica sem carência" },
