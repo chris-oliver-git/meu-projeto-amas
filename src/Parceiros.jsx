@@ -21,7 +21,7 @@ const REDE_CREDENCIADA = [
       "Clínica Geral", "Ortopedia", "Cardiologia", "Otorrinolaringologia",
       "Dermatologia", "Pediatria", "Endocrinologia", "Pneumologia",
       "Fisioterapia", "Psiquiatria", "Gastroenterologia", "Psicologia",
-      "Ginecologia", "Raio-X", "Nutrição", "Reumatologia"
+      "Ginecologia", "Raio-X", "Nutrição", "Ultrassonografia",
     ],
     mapaEmbed: "https://maps.google.com/maps?q=Avenida%20Autom%C3%B3vel%20Clube%2C%2063%20-%20Centro%2C%20S%C3%A3o%20Jo%C3%A3o%20de%20Meriti%20-%20RJ&t=&z=16&ie=UTF8&iwloc=&output=embed"
   },
@@ -33,12 +33,12 @@ const REDE_CREDENCIADA = [
     bairro: "Centro",
     endereco: "Rua Arruda Negreiros, 11 - Centro, Duque de Caxias - RJ",
     horario: "Segunda à Sexta (7:30 às 17:00)",
-    telefone: "(21) 2652-5991",
-    whatsapp: "552126525991",
+    telefone: "(21) 3668-3100",
+    whatsapp: "552136683100",
     especialidades: [
       "Clínica Geral", "Ginecologia", "Cardiologia", "Mastologista",
-      "Dermatologia", "Ortopedia", "Endocrinologia", "Pediatria",
-      "Fonoaudiologia", "Psiquiatria", "Gastroenterologia", "Raio-X"
+      "Dermatologia", "Ortopedia", "Endocrinologia", "Fonoaudiologia",
+      "Psiquiatria", "Gastroenterologia", "Raio-X"
     ],
     mapaEmbed: "https://maps.google.com/maps?q=Rua%20Arruda%20Negreiros%2C%2011%20-%20Centro%2C%20Duque%20de%20Caxias%20-%20RJ&t=&z=15&ie=UTF8&iwloc=&output=embed"
   },
@@ -83,7 +83,7 @@ const LISTA_PARCEIROS = [
   { nome: "YES! Idiomas", categoria: "Educação", desconto: "Bolsa de 50%", sufixoDesconto: "de desconto", descricao: "Com AMAS, o aprendizado de idiomas alcança uma excelência e comunicação prática desde a primeira aula na Yes! Idiomas.", icone: <GraduationCap className="w-8 h-8 text-red-600" /> },
   { nome: "Saúde Pés e Mãos", categoria: "Bem-estar e Saúde", desconto: "15%", sufixoDesconto: "de desconto", descricao: "Ser AMAS garante mais cuidado, prevenção e saúde completa para mãos e pés na Saúde Pés e Mãos.", icone: <Sparkles className="w-8 h-8 text-emerald-600" /> },
   { nome: "Ative Life Cosméticos", categoria: "Bem-estar e Saúde", desconto: "Até 20%", sufixoDesconto: "de desconto", descricao: "Ter AMAS é desfrutar de cuidado e relaxamento que transformam a rotina em um verdadeiro ritual de SPA com a Ative Life.", icone: <Sparkles className="w-8 h-8 text-purple-600" /> },
-  { nome: "Ótica Boa Visão", categoria: "Ótica", desconto: "A partir de 15%", sufixoDesconto: "de desconto", descricao: "Quem tem AMAS tem mais cuidado com a visão, quality e bem-estar na Ótica Boa Visão de Meriti.", icone: <Glasses className="w-8 h-8 text-blue-600" /> },
+  { nome: "Ótica Boa Visão", categoria: "Ótica", desconto: "A partir de 15%", sufixoDesconto: "de desconto", descricao: "Quem tem AMAS tem mais cuidado com a visão, qualidade e bem-estar na Ótica Boa Visão de Meriti.", icone: <Glasses className="w-8 h-8 text-blue-600" /> },
   { nome: "Hospital Daniel Lipp", categoria: "Emergência", desconto: "20%", sufixoDesconto: "de desconto", descricao: "Quem tem AMAS conta com atendimento de emergência a qualquer hora com segurança e cuidado no Hospital Daniel Lipp.", icone: <HeartPulse className="w-8 h-8 text-cyan-700" /> },
   { nome: "Raquel Groomer", categoria: "Pet Service", desconto: "Até 20%", sufixoDesconto: "de desconto", descricao: "Ser AMAS é cuidado contínuo e bem-estar para o seu pet com carinho e excelência na Raquel Groomer.", icone: <Scissors className="w-8 h-8 text-gray-700" /> }
 ];
@@ -184,14 +184,21 @@ export function AmasBeneficiosPage({ setPaginaAtiva }) {
       </section>
 
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-gray-200 pb-4 gap-4">
-          <div className="flex items-center space-x-3 justify-center sm:justify-start">
-            <div className="w-1.5 h-6 bg-[#ff6b00] rounded-full" />
-            <h2 className="text-xl sm:text-2xl font-black text-[#0b1f52] tracking-tight">Rede Conveniada e Descontos</h2>
-          </div>
+        {/* Modificado para flex-row e justify-center: Alinha perfeitamente no centro tanto no mobile quanto no desktop */}
+        <div className="flex justify-center border-b border-gray-200 pb-4">
           <div className="flex items-center space-x-1.5 overflow-x-auto pb-2 sm:pb-0 scrollbar-none">
             {categorias.map((cat) => (
-              <button key={cat} onClick={() => setCategoriaAtiva(cat)} className={`px-3 py-1.5 rounded-xl text-xs font-bold border cursor-pointer transition-all ${categoriaAtiva === cat ? 'bg-[#0b1f52] text-white border-[#0b1f52]' : 'bg-white text-[#0b1f52] border-gray-200 hover:border-[#ff6b00]'}`}>{cat}</button>
+              <button 
+                key={cat} 
+                onClick={() => setCategoriaAtiva(cat)} 
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold border cursor-pointer transition-all ${
+                  categoriaAtiva === cat 
+                    ? 'bg-[#0b1f52] text-white border-[#0b1f52]' 
+                    : 'bg-white text-[#0b1f52] border-gray-200 hover:border-[#ff6b00]'
+                }`}
+              >
+                {cat}
+              </button>
             ))}
           </div>
         </div>

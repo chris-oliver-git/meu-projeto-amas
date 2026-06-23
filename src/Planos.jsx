@@ -174,7 +174,7 @@ export default function AmasPlanosPage({ setPaginaAtiva }) {
 
       {/* REDE DE ATENDIMENTO */}
       <section className="max-w-5xl mx-auto px-4 pt-20 text-center">
-        <h2 className="text-2xl sm:text-3xl font-black text-[#0b1f52] tracking-tight">Rede de Atendimento</h2>
+        <h2 className="text-2xl sm:text-3xl font-black text-[#0b1f52] tracking-tight">Benefícios AMAS</h2>
         <p className="text-gray-400 text-sm font-medium mt-1">Todos os planos dão acesso à nossa ampla rede credenciada com benefícios exclusivos.</p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-10 text-left">
