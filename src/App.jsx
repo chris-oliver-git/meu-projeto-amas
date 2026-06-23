@@ -7,6 +7,9 @@ import {
 // Importação dos ativos locais
 import logoAmas from './Logo_AMAS.png';
 import iconeAmas from './icone-amas.png'; 
+// Altere o caminho abaixo para onde você salvou a imagem do informativo
+import imagemInformativo from './Informativo - Encerramento APP.png'; 
+
 import { AmasRedePage, AmasBeneficiosPage } from './Parceiros.jsx';
 import AmasContatoPage from './Contato.jsx';
 import AmasAnexosPage from './Anexos.jsx';
@@ -25,6 +28,9 @@ export default function App() {
   const [paginaAtiva, setPaginaAtiva] = useState(obterPaginaPorUrl);
   const [menuAberto, setMenuAberto] = useState(false);
   const [carregando, setCarregando] = useState(true);
+  
+  // Estado para controlar a exibição do Pop-up informativo
+  const [popupAberto, setPopupAberto] = useState(true);
 
   // Sincronização automática do título da aba do navegador
   useEffect(() => {
@@ -84,6 +90,44 @@ export default function App() {
         <div className="fixed inset-0 bg-white flex items-center justify-center z-[9999]">
           <div className="flex flex-col items-center justify-center">
             <img src={iconeAmas} alt="Carregando..." className="h-16 sm:h-20 w-auto animate-spin" />
+          </div>
+        </div>
+      )}
+
+      {/* POP-UP INFORMATIVO (ENCERRAMENTO DO APP) */}
+      {popupAberto && !carregando && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-[999] p-4 animate-fade-in">
+          {/* Caixa do Modal */}
+          <div className="relative bg-white rounded-2xl overflow-hidden max-w-[500px] w-full max-h-[90vh] flex flex-col shadow-2xl border border-gray-100">
+            
+            {/* Botão de Fechar */}
+            <button 
+              onClick={() => setPopupAberto(false)}
+              className="absolute top-3 right-3 z-10 p-2 rounded-full bg-black/50 hover:bg-black/70 text-white transition-all backdrop-blur-sm"
+              title="Fechar comunicado"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            {/* Imagem do Informativo com Scroll interno caso a tela seja muito pequena */}
+            <div className="overflow-y-auto w-full h-full object-contain">
+              <img 
+                src={imagemInformativo} 
+                alt="Comunicado Importante - Encerramento do App Amas" 
+                className="w-full h-auto block"
+              />
+            </div>
+
+            {/* Botão de rodapé opcional para facilitar o fechamento em celulares */}
+            <div className="p-3 bg-gray-50 border-t border-gray-100 flex justify-end">
+              <button 
+                onClick={() => setPopupAberto(false)}
+                className="px-6 py-2 bg-[#0b1f52] hover:bg-[#ff6b00] text-white text-sm font-bold rounded-xl transition-all"
+              >
+                Entendi e quero fechar
+              </button>
+            </div>
+
           </div>
         </div>
       )}
