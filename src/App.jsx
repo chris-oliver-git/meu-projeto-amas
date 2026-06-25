@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { 
   FileText, LogIn, CreditCard, Check, DollarSign, 
-  Building2, Heart, Clock, Menu, X 
+  Building2, Heart, Menu, X 
 } from 'lucide-react';
 
 // Importação dos ativos locais
 import logoAmas from './Logo_AMAS.png';
 import iconeAmas from './icone-amas.png'; 
-// Altere o caminho abaixo para onde você salvou a imagem do informativo
 import imagemInformativo from './Informativo - Encerramento APP.png'; 
 
 import { AmasRedePage, AmasBeneficiosPage } from './Parceiros.jsx';
@@ -28,8 +27,6 @@ export default function App() {
   const [paginaAtiva, setPaginaAtiva] = useState(obterPaginaPorUrl);
   const [menuAberto, setMenuAberto] = useState(false);
   const [carregando, setCarregando] = useState(true);
-  
-  // Estado para controlar a exibição do Pop-up informativo
   const [popupAberto, setPopupAberto] = useState(true);
 
   // Sincronização automática do título da aba do navegador
@@ -94,13 +91,10 @@ export default function App() {
         </div>
       )}
 
-      {/* POP-UP INFORMATIVO (ENCERRAMENTO DO APP) */}
+      {/* POP-UP INFORMATIVO */}
       {popupAberto && !carregando && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-[999] p-4 animate-fade-in">
-          {/* Caixa do Modal */}
           <div className="relative bg-white rounded-2xl overflow-hidden max-w-[500px] w-full max-h-[90vh] flex flex-col shadow-2xl border border-gray-100">
-            
-            {/* Botão de Fechar */}
             <button 
               onClick={() => setPopupAberto(false)}
               className="absolute top-3 right-3 z-10 p-2 rounded-full bg-black/50 hover:bg-black/70 text-white transition-all backdrop-blur-sm"
@@ -108,17 +102,13 @@ export default function App() {
             >
               <X className="w-6 h-6" />
             </button>
-
-            {/* Imagem do Informativo com Scroll interno caso a tela seja muito pequena */}
             <div className="overflow-y-auto w-full h-full object-contain">
               <img 
                 src={imagemInformativo} 
-                alt="Comunicado Importante - Encerramento do App Amas" 
+                alt="Comunicado Importante" 
                 className="w-full h-auto block"
               />
             </div>
-
-            {/* Botão de rodapé opcional para facilitar o fechamento em celulares */}
             <div className="p-3 bg-gray-50 border-t border-gray-100 flex justify-end">
               <button 
                 onClick={() => setPopupAberto(false)}
@@ -127,7 +117,6 @@ export default function App() {
                 Entendi e quero fechar
               </button>
             </div>
-
           </div>
         </div>
       )}
@@ -155,7 +144,7 @@ export default function App() {
             ))}
           </nav>
 
-          {/* BOTÕES DE AÇÃO */}
+          {/* BOTÕES DE AÇÃO (DESKTOP) */}
           <div className="hidden xl:flex items-center space-x-3 shrink-0">
             <a href={URL_BOLETO} target="_blank" rel="noreferrer" className="flex items-center space-x-1 border border-gray-300 px-4 py-2 rounded-full text-sm font-medium text-gray-700 bg-white">
               <FileText className="w-4 h-4 text-blue-600" /><span>Boleto</span>
@@ -168,6 +157,7 @@ export default function App() {
             </a>
           </div>
 
+          {/* ÍCONE MENU HAMBÚRGUER (MOBILE) */}
           <div className="flex items-center xl:hidden">
             <button onClick={() => setMenuAberto(!menuAberto)} className="p-2.5 rounded-xl border border-gray-100">
               {menuAberto ? <X className="w-6 h-6 text-[#ff6b00]" /> : <Menu className="w-6 h-6 text-[#0b1f52]" />}
@@ -175,10 +165,11 @@ export default function App() {
           </div>
         </div>
 
-        {/* HAMBÚRGUER MOBILE */}
+        {/* MENU EXPANSÍVEL MOBILE */}
         {menuAberto && (
           <div className="xl:hidden border-t border-gray-100 bg-white shadow-lg max-h-[calc(100vh-80px)] overflow-y-auto">
             <div className="px-4 pt-3 pb-6 space-y-2 flex flex-col">
+              {/* Links das Páginas */}
               {LINKS_NAVEGACAO.map((item, idx) => (
                 <button 
                   key={idx}
@@ -190,6 +181,42 @@ export default function App() {
                   {item.label}
                 </button>
               ))}
+
+              {/* Linha Divisória */}
+              <div className="border-t border-gray-100 my-2 pt-2" />
+
+              {/* Botões de Ação Inclusos no Mobile */}
+              <div className="flex flex-col space-y-3 px-2 pt-2">
+                <a 
+                  href={URL_BOLETO} 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="flex items-center justify-center space-x-2 border border-gray-300 py-3 rounded-xl text-sm font-bold text-gray-700 bg-white shadow-sm"
+                >
+                  <FileText className="w-4 h-4 text-blue-600" />
+                  <span>Boleto</span>
+                </a>
+                
+                <a 
+                  href={URL_LOGIN} 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="flex items-center justify-center space-x-2 bg-[#0b1f52] py-3 rounded-xl text-sm font-bold text-white shadow-sm"
+                >
+                  <LogIn className="w-4 h-4" />
+                  <span>Login</span>
+                </a>
+                
+                <a 
+                  href={URL_WHATSAPP} 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="flex items-center justify-center space-x-2 bg-[#ff6b00] py-3 rounded-xl text-sm font-bold text-white shadow-sm"
+                >
+                  <CreditCard className="w-4 h-4" />
+                  <span>Adquirir Cartão</span>
+                </a>
+              </div>
             </div>
           </div>
         )}
@@ -260,16 +287,15 @@ export default function App() {
         )}
       </div>
 
-      {/* FOOTER GLOBAL - COM ÍCONES EM SVG INLINE */}
+      {/* FOOTER GLOBAL */}
       <footer className="bg-[#0b1f52] text-[#a5b4fc] pt-12 pb-8 border-t border-white/5 mt-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center sm:text-left">
           
-          {/* BLOCO INSTITUCIONAL COM AS REDES SOCIAIS OFICIAIS */}
+          {/* BLOCO INSTITUCIONAL */}
           <div className="flex flex-col items-center sm:items-start space-y-4">
             <img src={logoAmas} alt="Cartão Amas" className="h-11 w-auto bg-white/10 p-1.5 rounded-lg" />
             <p className="text-[14px] text-[#a5b4fc]/80">Cartão Amas — O seu cartão de Assistência.</p>
             
-            {/* Ícones de redirecionamento em SVG Inline para evitar erros de versão */}
             <div className="flex items-center space-x-2.5 pt-1 justify-center sm:justify-start">
               <a 
                 href="https://pt-br.facebook.com/cartaoamas" 
@@ -298,27 +324,36 @@ export default function App() {
             </div>
           </div>
 
+          {/* COLUNA NAVEGAÇÃO */}
           <div className="space-y-3">
             <h4 className="text-[14px] font-bold text-white uppercase tracking-wider">Navegação</h4>
             <div className="flex flex-col space-y-2 text-[14px]">
-              <button onClick={() => navegarPara('inicio')} className="hover:text-white text-left">Home</button>
-              <button onClick={() => navegarPara('planos')} className="hover:text-white text-left">Planos</button>
-              <button onClick={() => navegarPara('rede')} className="hover:text-white text-left">Rede</button>
-              <button onClick={() => navegarPara('beneficios')} className="hover:text-white text-left">Benefícios</button>
+              <button onClick={() => navegarPara('inicio')} className="hover:text-white text-center sm:text-left">Home</button>
+              <button onClick={() => navegarPara('planos')} className="hover:text-white text-center sm:text-left">Planos</button>
+              <button onClick={() => navegarPara('rede')} className="hover:text-white text-center sm:text-left">Rede</button>
+              <button onClick={() => navegarPara('beneficios')} className="hover:text-white text-center sm:text-left">Benefícios</button>
             </div>
           </div>
+
+          {/* COLUNA SERVIÇOS */}
           <div className="space-y-3">
             <h4 className="text-[14px] font-bold text-white uppercase tracking-wider">Serviços</h4>
             <div className="flex flex-col space-y-2 text-[14px]">
-              <button onClick={() => navegarPara('agendamento')} className="hover:text-white text-left">Agendamento</button>
-              <button onClick={() => navegarPara('anexos')} className="hover:text-white text-left">Anexos</button>
-              <button onClick={() => navegarPara('contato')} className="hover:text-white text-left">Contato</button>
+              <button onClick={() => navegarPara('agendamento')} className="hover:text-white text-center sm:text-left">Agendamento</button>
+              <button onClick={() => navegarPara('anexos')} className="hover:text-white text-center sm:text-left">Anexos</button>
+              <button onClick={() => navegarPara('contato')} className="hover:text-white text-center sm:text-left">Contato</button>
             </div>
           </div>
+
+          {/* COLUNA CONTATO */}
           <div className="space-y-3">
             <h4 className="text-[14px] font-bold text-white uppercase tracking-wider">Contato</h4>
-            <div className="text-[14px] text-[#a5b4fc]/80"><p className="text-white font-semibold">AMAS MULTI BENEFICIOS LTDA</p><p>CNPJ 31.798.999/0001-90</p></div>
+            <div className="text-[14px] text-[#a5b4fc]/80">
+              <p className="text-white font-semibold">AMAS MULTI BENEFICIOS LTDA</p>
+              <p>CNPJ 31.798.999/0001-90</p>
+            </div>
           </div>
+
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 mt-8 border-t border-white/10 text-center text-xs text-[#a5b4fc]/60">
           <p>Copyright © 2026 AMAS MULTI BENEFICIOS LTDA. Todos os direitos reservados. Desenvolvido por <span className="text-[#ff6b00] font-bold">Íon Digital</span></p>
