@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   MapPin, Clock, Phone, ArrowUpRight, ChevronRight,
-  Pill, GraduationCap, Sparkles, HeartPulse, Glasses, Scissors, LayoutGrid
+  Pill, GraduationCap, Sparkles, HeartPulse, Glasses, Scissors, FileText
 } from 'lucide-react';
 
 // DATA: UNIDADES MÉDICAS OFICIAIS (REDE CREDENCIADA)
@@ -84,7 +84,7 @@ const LISTA_PARCEIROS = [
   { nome: "Saúde Pés e Mãos", categoria: "Bem-estar e Saúde", desconto: "15%", sufixoDesconto: "de desconto", descricao: "Ser AMAS garante mais cuidado, prevenção e saúde completa para mãos e pés na Saúde Pés e Mãos.", icone: <Sparkles className="w-8 h-8 text-emerald-600" /> },
   { nome: "Ative Life Cosméticos", categoria: "Bem-estar e Saúde", desconto: "Até 20%", sufixoDesconto: "de desconto", descricao: "Ter AMAS é desfrutar de cuidado e relaxamento que transformam a rotina em um verdadeiro ritual de SPA com a Ative Life.", icone: <Sparkles className="w-8 h-8 text-purple-600" /> },
   { nome: "Ótica Boa Visão", categoria: "Ótica", desconto: "A partir de 15%", sufixoDesconto: "de desconto", descricao: "Quem tem AMAS tem mais cuidado com a visão, qualidade e bem-estar na Ótica Boa Visão de Meriti.", icone: <Glasses className="w-8 h-8 text-blue-600" /> },
-  { nome: "Hospital Daniel Lipp", categoria: "Emergência", desconto: "20%", sufixoDesconto: "de desconto", descricao: "Quem tem AMAS conta com atendimento de emergência a qualquer hora com segurança e cuidado no Hospital Daniel Lipp.", icone: <HeartPulse className="w-8 h-8 text-cyan-700" /> },
+  { nome: "Hospital Daniel Lipp", category: "Emergência", desconto: "20%", sufixoDesconto: "de desconto", descricao: "Quem tem AMAS conta com atendimento de emergência a qualquer hora com segurança e cuidado no Hospital Daniel Lipp.", icone: <HeartPulse className="w-8 h-8 text-cyan-700" /> },
   { nome: "Raquel Groomer", categoria: "Pet Service", desconto: "Até 20%", sufixoDesconto: "de desconto", descricao: "Ser AMAS é cuidado contínuo e bem-estar para o seu pet com carinho e excelência na Raquel Groomer.", icone: <Scissors className="w-8 h-8 text-gray-700" /> }
 ];
 
@@ -184,7 +184,6 @@ export function AmasBeneficiosPage({ setPaginaAtiva }) {
       </section>
 
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
-        {/* Modificado para flex-row e justify-center: Alinha perfeitamente no centro tanto no mobile quanto no desktop */}
         <div className="flex justify-center border-b border-gray-200 pb-4">
           <div className="flex items-center space-x-1.5 overflow-x-auto pb-2 sm:pb-0 scrollbar-none">
             {categorias.map((cat) => (
@@ -217,6 +216,27 @@ export function AmasBeneficiosPage({ setPaginaAtiva }) {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* NOTA DE DIRECIONAMENTO TOTALMENTE CONFIGURADA COM LINK E COMPORTAMENTO SPA */}
+        <div className="mt-12 bg-blue-50/60 border border-blue-100 rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left shadow-sm">
+          <div className="p-3 bg-white rounded-xl text-blue-600 shadow-sm shrink-0">
+            <FileText className="w-6 h-6" />
+          </div>
+          <p className="text-sm text-blue-950 font-medium leading-relaxed">
+            Para acessar o documento completo de vantagens e conhecer o regulamento de sua utilização,{' '}
+            <a 
+              href="/anexos"
+              onClick={(e) => {
+                e.preventDefault();
+                setPaginaAtiva('anexos');
+              }}
+              className="text-[#ff6b00] font-bold underline hover:text-[#e05e00] transition-colors inline-block cursor-pointer focus:outline-none"
+            >
+              clique aqui para acessar a página "Anexos"
+            </a>{' '}
+            e faça o download do <strong className="text-[#0b1f52]">"Guia de Benefícios Cartão Amas"</strong>.
+          </p>
         </div>
       </section>
     </div>
