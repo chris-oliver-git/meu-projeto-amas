@@ -7,7 +7,7 @@ import {
 const REDE_CREDENCIADA = [
   {
     id: 1,
-    nome: "Ápice Saúde - Unidade São João de Meriti",
+    nome: "Policlínica Ápice Saúde - Unidade São João de Meriti",
     descricao: "A Ápice Saúde possui mais de 20 anos de tradição em qualidade e resolutividade no segmento da saúde em São João de Meriti. Oferece consultas, exames, pronto atendimento e cirurgias a preço popular. Conta com equipamentos de alta tecnologia, como o melhor e mais moderno tomógrafo da Baixada Fluminense. Com essa parceria, o Cartão Amas expande o acesso a serviços de excelência para seus beneficiários na região.",
     cidade: "São João de Meriti",
     bairro: "Centro",
@@ -26,7 +26,7 @@ const REDE_CREDENCIADA = [
   },
   {
     id: 2,
-    nome: "Ápice Saúde - Unidade Duque de Caxias",
+    nome: "Policlínica Ápice Saúde - Unidade Duque de Caxias",
     descricao: "A Ápice Saúde - Unidade Duque de Caxias está há mais de 26 anos promovendo saúde e bem-estar para seus pacientes.",
     cidade: "Duque de Caxias",
     bairro: "Centro",
@@ -56,7 +56,7 @@ const REDE_CREDENCIADA = [
   },
   {
     id: 4,
-    nome: "Ápice Saúde - Unidade Centro/RJ",
+    nome: "Policlínica Ápice Saúde - Unidade Centro/RJ",
     descricao: "A Ápice Saúde - Unidade Centro/RJ oferece atendimento médico especializado de excelência no coração do Rio de Janeiro, proporcionando consultas de qualidade, conforto e fácil acesso para cuidar do seu bem-estar.",
     cidade: "Rio de Janeiro",
     bairro: "Centro",

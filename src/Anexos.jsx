@@ -30,8 +30,8 @@ const DOCUMENTOS = [
   },
   {
     titulo: "Anexo II - Comparativo das Assistências (2026)",
-    descricao: "Valores de referência para coparticipação em consultas e exames. - (01/2026)",
-    arquivo: "/Anexo-2-042026-Comparativo-das-Assistencias.pdf"
+    descricao: "Valores de referência para coparticipação em consultas e exames. - (08/2026)",
+    arquivo: "/Anexo-2-082026-Comparativo-das-Assistencias.pdf"
   },
   {
     titulo: "Anexo III - Prazos de Acesso",
