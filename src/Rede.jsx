@@ -60,7 +60,7 @@ const REDE_CREDENCIADA = [
     descricao: "A Ápice Saúde - Unidade Centro/RJ oferece atendimento médico especializado de excelência no coração do Rio de Janeiro, proporcionando consultas de qualidade, conforto e fácil acesso para cuidar do seu bem-estar.",
     cidade: "Rio de Janeiro",
     bairro: "Centro",
-    endereco: "Av. Rio Branco, 156 - Centro, Rio de Janeiro - RJ, 20040-003",
+    endereco: "Av. Rio Branco, 156 - Edificio Central / Bloco B / Sala 2216 - Centro, Rio de Janeiro - RJ, 20040-003",
     horario: "Segundas e Sextas (8h00 às 17h00)",
     telefone: "(21) 3668-3100",
     whatsapp: "552136683100",
