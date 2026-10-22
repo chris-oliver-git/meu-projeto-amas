@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Metadados do Windows/Google Drive
+desktop.ini
