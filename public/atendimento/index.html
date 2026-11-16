@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
   <title>Chat de agendamento | Cartão AMAS</title>
   <style>
+    :root { color-scheme: only light; }
+    ez-webchat { --ez-body: #ffffff !important; }
     body { margin: 0; background: white; color: #16274a; font: 1rem/1.5 system-ui, sans-serif; }
     #status { margin: 2rem; text-align: center; }
   </style>
@@ -34,6 +36,7 @@
         if (window.ezchat.lastError) {
           mostrarFalha();
         } else if (document.querySelector('[data-fullscreen][data-open]')) {
+          window.ezchat.set('theme', 'light');
           status.hidden = true;
         } else if (Date.now() >= deadline) {
           mostrarFalha();
